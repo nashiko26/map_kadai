@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>そうだ、展覧会に行こう</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="http://maps.google.com/maps/api/js?key=[*****************]&language=ja"></script>
+  </head>
+  <body>
+    <!-- ここから↓ -->
+    <!-- コンテンツ部分 -->
+    <h1>そうだ、展覧会に行こう</h1>
+    <p>近くで開催されている展覧会を見ることができます。</p>
+    <p>
+      <input type="button" id="open" value="見る" onclick="doOpen()" />
+      <input type="button" id="close" value="閉じる" onclick="doClose()" />
+    </p>
+    <!-- コンテンツ部分 -->
+    <!-- MAP -->
+    <div id="map"></div>
+    <script>
+      let MyLatLng = new google.maps.LatLng(
+        35.715543670953075,
+        139.77582452583502
+      );
+      let Options = {
+        zoom: 15, //地図の縮尺値
+        center: MyLatLng, //地図の中心座標
+        mapTypeId: "roadmap", //地図の種類
+      };
+      let map = new google.maps.Map(document.getElementById("map"), Options);
+
+      let contentStr =
+        "<p>" +
+        '<img src="./img/icon1.png" width="24" height="24" alt="home" />' +
+        '<a href="https://www.nmwa.go.jp/jp/exhibitions/2023spain.html">スペインのイメージ</a>' +
+        "</p>" +
+        "<p>会期　2023年7月4日（火）～9月3日（日）</p>"; // ウィンドウ内コンテンツの指定
+      let infowindow = new google.maps.InfoWindow({
+        content: contentStr, // ウィンドウ内コンテンツ読み込み
+        position: MyLatLng,
+      });
+      function doOpen() {
+        infowindow.open(map);
+      }
+
+      function doClose() {
+        infowindow.close();
+      }
+    </script>
+    <!-- MAP -->
+    <!-- ここから↑ -->
+  </body>
+</html>
